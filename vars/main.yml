@@ -1,0 +1,13 @@
+---
+# vars file for lamp
+redhat_lamp_packages:
+  - httpd
+  - mariadb-server
+  - php
+
+debian_lamp_packages:
+  - apache2
+  - mariadb-server
+  - php
+
+

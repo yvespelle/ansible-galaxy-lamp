@@ -1,0 +1,38 @@
+---
+# tasks file for lamp
+- name:  lamp installation 
+  include_vars: '{{ansible_os_family}}.yml'
+
+- name: Debian
+  apt: name={{item}} state=present
+  with_items: '{{lamp_packages}}'
+  when: ansible_os_family == "Debian"
+  notify:
+    - starting and enabling apache
+    - starting and enabling mariadb
+
+- name: Centos/RedHat
+  yum: name={{item}} state=present 
+  with_items: '{{lamp_packages}}'
+  when: ansible_os_family == "RedHat"
+  notify:
+    - starting and enabling apache
+    - starting and enabling mariadb
+
+- name: ouverture pare-feu
+  firewalld: 
+    service: http 
+    permanent: true 
+    state: enabled
+    zone: public
+  when: ansible_os_family == "RedHat"  
+
+- name: mise en place de l'index html
+  template: 
+    src: templates/index.j2
+    dest: /var/www/html/index.html
+    backup: yes
+    mode: 0644
+    owner: "{{apache_user}}"
+    group: "{{apache_user}}"
+

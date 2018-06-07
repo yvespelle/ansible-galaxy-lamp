@@ -1,0 +1,8 @@
+---
+lamp_packages:
+  - httpd
+  - mariadb-server
+  - php
+
+apache_service: httpd
+apache_user : apache

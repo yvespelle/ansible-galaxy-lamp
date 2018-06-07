@@ -1,0 +1,14 @@
+---
+# handlers file for lamp
+
+- name: starting and enabling apache
+  service: 
+    name: '{{apache_service}}'
+    state: restarted
+    enabled: yes
+
+- name: starting and enabling mariadb
+  service: 
+    name: mariadb
+    state: restarted
+    enabled: yes

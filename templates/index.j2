@@ -1,0 +1,18 @@
+<html>
+<head>
+<title>{{ansible_os_family}} Apache Web Server</title>
+</head>
+<body>
+<h1><p><font color="red">{{ansible_distribution}} Apache Web Server</font></p></h1>
+{% if lamp_packages is defined %}
+<h2>Packages</h2>
+<ul>
+{% for item in lamp_packages %}
+<li>{{item}}</li>
+{% endfor %}
+</ul>
+{%endif%}
+<br />
+Powered by Ansible ! {{ansible_system}} Inside !
+</body>
+</html>
